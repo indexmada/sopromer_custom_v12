@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <template name="Sale Analysis Report" id="report_saledetails_sopro" inherit_id="point_of_sale.report_saledetails">
+            <xpath expr="//table[1]/thead/tr/th[3]" position="after">
+                <th>Total</th>
+            </xpath>
+            <xpath expr="//table[1]/tbody/tr/td[3]" position="replace">
+                <td>
+                    <t t-esc="'{:,}' .format(round(line[&quot;price_unit&quot;],2))"/>
+                    <t t-if="line[&quot;discount&quot;] != 0">
+                        Disc: <t t-esc="line[&quot;discount&quot;]"/>%
+                    </t>
+                </td>
+                <td><t t-esc="'{:,}' .format(round(line['quantity'] * line['price_unit'],2))"/></td>
+            </xpath>
+        </template>
+    </data>
+</odoo>
